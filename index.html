@@ -37,7 +37,7 @@ d3.tsv("data.csv", type, function(error, data) {
       .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
 
   bar.append("rect")
-      .attr("width", function(data) { return data.value; })
+      .attr("width", function(data) { return x(data.value); })
       .attr("height", barHeight - 1);
 
   bar.append("text")
