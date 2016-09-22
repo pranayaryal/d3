@@ -26,7 +26,7 @@ var x = d3.scale.linear()
 var chart = d3.select(".chart")
     .attr("width", width);
 
-d3.tsv("data.csv", type, function(error, data) {
+d3.csv("data.csv", type, function(error, data) {
   x.domain([0, d3.max(data, function(d) { return d.value; })]);
 
   chart.attr("height", barHeight * data.length);
@@ -37,7 +37,7 @@ d3.tsv("data.csv", type, function(error, data) {
       .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
 
   bar.append("rect")
-      .attr("width", function(data) { return x(data.value); })
+      .attr("width", function(d) { return x(d.value); })
       .attr("height", barHeight - 1);
 
   bar.append("text")
