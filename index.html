@@ -31,13 +31,13 @@ var g = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 d3.csv("data.csv", function(d) {
-  d.hours = +d.hours;
+  d.value = +d.value;
   return d;
 }, function(error, data) {
   if (error) throw error;
 
-  x.domain(data.map(function(d) { return d.date; }));
-  y.domain([0, d3.max(data, function(d) { return d.hours; })]);
+  x.domain(data.map(function(d) { return d.name; }));
+  y.domain([0, d3.max(data, function(d) { return d.value; })]);
 
   g.append("g")
       .attr("class", "axis axis--x")
@@ -58,10 +58,10 @@ d3.csv("data.csv", function(d) {
     .data(data)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.date); })
-      .attr("y", function(d) { return y(d.hours); })
+      .attr("x", function(d) { return x(d.name); })
+      .attr("y", function(d) { return y(d.value); })
       .attr("width", x.bandwidth())
-      .attr("height", function(d) { return height - y(d.hours); });
+      .attr("height", function(d) { return height - y(d.value); });
 });
 
 </script>
